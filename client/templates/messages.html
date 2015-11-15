@@ -11,6 +11,7 @@ animationOut: hingeOutFromMiddleX
   <p ng-hide="user">Sign in before viewing snaps</p>
   <p ng-hide="user.get('emailVerified') || !user">Verify your email before you can view this page.</p>
   <section class="block-list" ng-show="user.get('emailVerified')">
+    <header ng-hide="messages.length>0">Sorry, you don't have any snaps to view!</header>
     <ul>
       <li ng-repeat="snap in messages" ng-if="user.id == snap.get('user')['objectId']" >
         <div>

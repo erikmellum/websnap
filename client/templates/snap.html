@@ -17,10 +17,10 @@ animationOut: slideOutRight
       <form name="snap" ng-show="user.get('emailVerified')">
         <input type="file" id="image">
         <hr>
-        <label>Search Users: </label><input type="text" placeholder="Search by username or password" ng-model="search">
+        <label>Search Users: </label><input type="text" placeholder="Search by username or email" ng-model="search">
         <section class="block-list">
           <header>Select who you want to send it to</header>
-          <ul>
+          <ul style="max-height: 200px; overflow: auto;">
             <li ng-repeat="user in all_users | filter: search">
               <input type="checkbox" ng-model="users[$index]" name="{{user.get('username')}}" id="{{user.get('username')}}" value="{{user}}" ng-false-value="''" ng-true-value="{{user}}">
               <label for="{{user.get('username')}}">{{user.get('username')}}: {{user.get('email')}}</label>

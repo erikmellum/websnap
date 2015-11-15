@@ -9,7 +9,7 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
         $rootScope.user = Parse.User.current();
         $scope.username = username;
         $scope.$apply();
-        foundationApi.publish('main-notifications', { title: 'Logged in!', content: 'Welcome, username' , autoclose: '3000' });
+        foundationApi.publish('main-notifications', { title: 'Logged in!', content: 'Welcome, ' + username , autoclose: '3000' });
         $state.go('snap')
         // Do stuff after successful login.
       },

@@ -37,7 +37,12 @@ messagesController.controller('MessagesCtrl', ['$scope', 'FoundationApi', '$time
     query.find({
       success: function(messages) {
         //console.log(JSON.stringify(messages))
-        $scope.messages=messages;
+        $scope.messages = [];
+        for(var i=0; i<messages.length; i++){
+          if($scope.user.id == messages[i].get('user')['objectId']) {
+            $scope.messages.push(messages[i])
+          }
+        }
         $scope.$apply();
         // comments now contains the comments for posts with images.
       },
