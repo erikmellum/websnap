@@ -1,0 +1,12 @@
+---
+name: home
+url: /
+controller: HomeCtrl
+animationIn: slideInRight
+animationOut: slideOutLeft
+---
+
+<div class="grid-container">
+  <h1>Welcome to WebSnap<span ng-if="user">, {{user.get('username')}}</span>!</h1>
+  <div ng-include src="'templates/login.html'"></div>
+</div>

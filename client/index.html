@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" ng-app="application">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Erik's Websnap</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+    <link href="./assets/css/app.css" rel="stylesheet" type="text/css">
+    <script src="./assets/js/foundation.js"></script>
+    <script src="./assets/js/templates.js"></script>
+    <script src="./assets/js/routes.js"></script>
+    <script src="./assets/js/app.js"></script>
+
+  </head>
+  <body>
+    <div class="grid-frame vertical">
+      <div class="grid-content shrink" style="padding: 0;">
+        <div class="primary title-bar">
+          <div class="center title"><a ui-sref="home">WebSnap</a></div>
+          <span class="left" ng-if="user"><a ui-sref="snap"><strong>Begin Snapping</strong></a></span>
+          <span class="right" ng-if="user"><a ui-sref="messages">View Snaps</a></span>
+        </div>
+      </div>
+      <div ui-view class="grid-content">
+      </div>
+    </div>
+    <zf-notification-set id="main-notifications" position="bottom"></zf-notification-set>
+  </body>
+</html>

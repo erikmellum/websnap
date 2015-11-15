@@ -1,0 +1,28 @@
+---
+name: messages
+url: /messages
+controller: MessagesCtrl
+animationIn: hingeInFromMiddleX
+animationOut: hingeOutFromMiddleX
+---
+
+<div class="grid-container">
+  <h1>Check out your Snaps!</h1>
+  <p ng-hide="user">Sign in before viewing snaps</p>
+  <p ng-hide="user.get('emailVerified') || !user">Verify your email before you can view this page.</p>
+  <section class="block-list" ng-show="user.get('emailVerified')">
+    <ul>
+      <li ng-repeat="snap in messages" ng-if="user.id == snap.get('user')['objectId']" >
+        <div>
+          <a ng-click="showImage(snap.id, snap.get('image').url(), snap)"><img style="cursor: pointer;" zf-iconic="" icon="Share-boxed" size="small" ></a>
+          <span style="fonter-size: 155%">{{snap.get('contents')}}</span>
+        </div>
+        <div zf-modal="" id="{{snap.id}}">
+          <a zf-close="{{snap.id}}" class="close-button">×</a>
+          <img src="{{url}}">
+          <h3>Time Left: {{timer[snap.id]/1000}}</h3>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>

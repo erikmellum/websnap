@@ -1,0 +1,15 @@
+@import "settings";
+@import "foundation";
+.error{
+  width: 100%;
+  height: 2rem;
+  padding: .5rem;
+  margin: .5rem;
+  border-radius: 1rem;
+  vertical-align: middle;
+  color: #333;
+  background: $alert-color;
+}
+.invalidMessage{
+	border: 1px solid $alert-color !important;
+}

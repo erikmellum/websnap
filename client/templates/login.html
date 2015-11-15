@@ -1,0 +1,45 @@
+
+<div class="grid-container" ng-controller="LoginCtrl">
+  <div class="grid-block" ng-init="signin=true">
+    <div class="grid-block" ng-show="signin" ng-hide="user">
+      <div class="grid-content">
+        <h3>Sign in</h3>
+        <div class="error" ng-if="error">{{error}}</div>
+        <label>Username
+          <input type="text" placeholder="emellum" ng-model="name">
+        </label>
+        <label>Password
+          <input type="password" placeholder="scotchyscotch" ng-model="password">
+        </label>
+        <button class="button success" ng-click="login(name,password)">Login</button>
+        <button class="button warning" ng-click="signin=false">Sign up</button>
+      </div>
+    </div>
+    <div class="grid-block" ng-hide="signin || user">
+      <div class="grid-content">
+      <h3>Sign up</h3>
+      <div class="error" ng-if="error">{{error}} test</div>
+      <label>Username
+        <input type="text" placeholder="emellum" ng-model="name">
+      </label>
+      <label>Email
+        <input type="email" placeholder="emellum@mail.csuchico.edu" ng-model="email">
+      </label>
+      <label>Password
+        <input type="password" placeholder="scotchyscotch" ng-model="password">
+      </label>
+      <label>Confirm Password
+        <input type="password" placeholder="scotchyscotch" ng-model="confirm">
+      </label>
+      <button class="button success" ng-click="signup(name, email, password, confirm)">Create Account</button>
+      <button class="button warning" ng-click="signin=true">Sign in</button>
+
+      </div>
+    </div>
+    <div class="grid-block" ng-show="user">
+      <div class="grid-content">
+        <button class="button alert " ng-click="signout()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>

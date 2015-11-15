@@ -1,0 +1,40 @@
+---
+name: snap
+url: /snap
+controller: SnapCtrl
+animationIn: slideInLeft
+animationOut: slideOutRight
+---
+
+<div class="grid-container" ng-controller="UserCtrl">
+  <div class="grid-block">
+    <div class="grid-content">
+      <h1>Take a picture!</h1>
+      <p ng-hide="user">Sign in before creating snaps!</p>
+      <p ng-hide="user.get('emailVerified') || !user">Verify your email before sending snaps.</p>
+
+      <div class="error" ng-if="error">{{error}}</div>
+      <form name="snap" ng-show="user.get('emailVerified')">
+        <input type="file" id="image">
+        <hr>
+        <label>Search Users: </label><input type="text" placeholder="Search by username or password" ng-model="search">
+        <section class="block-list">
+          <header>Select who you want to send it to</header>
+          <ul>
+            <li ng-repeat="user in all_users | filter: search">
+              <input type="checkbox" ng-model="users[$index]" name="{{user.get('username')}}" id="{{user.get('username')}}" value="{{user}}" ng-false-value="''" ng-true-value="{{user}}">
+              <label for="{{user.get('username')}}">{{user.get('username')}}: {{user.get('email')}}</label>
+            </li>
+          </ul>
+        </section>
+        <label>Enter a message to send with your picture: </label>
+        <input type="text" name="message" placeholder="No more than 140 characters" ng-model="message" ng-maxlength="140" ng-class="{invalidMessage: snap.message.$invalid && !snap.message.$untouched && !snap.message.$pristine}">
+        <p ng-if="snap.message.$invalid && !snap.message.$pristine && !snap.message.$untouched ">
+          Your message has longer than 140 characters, please reduce the length.
+        </p>
+        <button class="button success" type="submit" ng-click="send(message, snap.users); message = ''; users=[];" ng-class="{disabled: snap.$invalid || users.length == 0}" ng-disabled="snap.$invalid || users.length == 0">Send</button>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div zf-panel="" position="left">
+<a zf-close="" class="close-button">×</a>
+<p>Users choice</p>
+<section ng-controller="UserCtrl" class="block-list">
+  <ul>
+    <li ng-repeat="user in all_users">{{user.name}}</li>
+  </ul>
+</section>
+</div>
