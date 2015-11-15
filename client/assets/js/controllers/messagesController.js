@@ -1,9 +1,9 @@
 var messagesController = angular.module('MessagesController', ['foundation.core'])
 
 messagesController.controller('MessagesCtrl', ['$scope', 'FoundationApi', '$timeout', function($scope, foundationApi, $timeout){
-  $scope.timer = {};
-  $scope.url = '';
-  $scope.messages = [];
+  $scope.timer = {};//can hold multiple timers simultaneously
+  $scope.url = '';//url to the image being displayed
+  $scope.messages = [];//list of messages
   $scope.username = ''
   $scope.showImage=function(modalId, url, message){
       message.set('viewed', true);
@@ -27,8 +27,6 @@ messagesController.controller('MessagesCtrl', ['$scope', 'FoundationApi', '$time
         $scope.retrieveMessages();
       },
       error: function(message, error) {
-        // The delete failed.
-        // error is a Parse.Error with an error code and message.
       }
     });
   }
@@ -36,7 +34,6 @@ messagesController.controller('MessagesCtrl', ['$scope', 'FoundationApi', '$time
     var query = new Parse.Query($scope.Message);
     query.find({
       success: function(messages) {
-        //console.log(JSON.stringify(messages))
         $scope.messages = [];
         for(var i=0; i<messages.length; i++){
           if($scope.user.id == messages[i].get('user')['objectId']) {
@@ -44,11 +41,9 @@ messagesController.controller('MessagesCtrl', ['$scope', 'FoundationApi', '$time
           }
         }
         $scope.$apply();
-        // comments now contains the comments for posts with images.
       },
       error: function(error) {
         console.log(error.code + ": " + error.message )
-        // The login failed. Check error to see why.
       }
     });
   }

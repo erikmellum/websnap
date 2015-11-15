@@ -12,13 +12,10 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
         foundationApi.publish('main-notifications', { title: 'Logged in!', content: 'Welcome, ' + username , autoclose: '3000' });
         $state.go('snap')
         $window.sessionStorage.token = Parse.Session.sessionToken;
-        // Do stuff after successful login.
-
       },
       error: function(user, error) {
         $scope.error = error.code + ": " + error.message
         $scope.$apply();
-        // The login failed. Check error to see why.
       }
     });
   }
@@ -36,10 +33,8 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
         $scope.username = username;
       },
       error: function(user, error) {
-        // Show the error message somewhere and let the user try again.
         $scope.error = error.message
         $scope.$apply();
-        //alert("Error: " + error.code + " " + error.message);
       }
     });
   }

@@ -24,7 +24,7 @@
       requireBase: false
     });
 
-    $locationProvider.hashPrefix('!');
+    $locationProvider.hashPrefix('ECL!');
   }
 
   function run($rootScope, $window) {
@@ -42,12 +42,6 @@
         this.viewed = false;
       }
     });
-    $rootScope.currentUser = Parse.User.current();
-    if ($rootScope.currentUser) {
-        // do stuff with the user
-    } else {
-        // show the signup or login page
-    }
   }
 
 })();

@@ -38,10 +38,13 @@ snapController.controller('SnapCtrl', ['$scope', 'FoundationApi', '$state', func
       });
     }
   }
+
+  /**
+  * Verify we get .png, .gif, or .jpg only
+  **/
   var el = angular.element(document.querySelector('#image'))
   el.change(function(){
     var val = el.val();
-
     switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
       case 'gif': case 'jpg': case 'png':
         break;
