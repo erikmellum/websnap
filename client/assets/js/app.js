@@ -27,9 +27,13 @@
     $locationProvider.hashPrefix('!');
   }
 
-  function run($rootScope) {
+  function run($rootScope, $window) {
     FastClick.attach(document.body);
     Parse.initialize("cm1bcVNQrZJ1XCUKJSYIub7C2MqSxK8lzR5o9bCd", "1xbBZxRIRRV8Fc3HibtH6sOTnpmayA8lLNIC4BzW");
+    if($window.sessionStorage.token) {
+      $rootScope.user=Parse.User.current()
+      $rootScope.$apply();
+    }
     $rootScope.Message = Parse.Object.extend("Message", {
       initialize: function (attrs, options) {
         this.user = ""

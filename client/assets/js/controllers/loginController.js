@@ -1,7 +1,7 @@
 var loginController = angular.module('LoginController', ['foundation.core'])
 
-loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'FoundationApi',
- function($scope, $rootScope, $state, foundationApi){
+loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'FoundationApi', '$window',
+ function($scope, $rootScope, $state, foundationApi, $window){
   $scope.username = '';
   $scope.login=function(username, password){
     Parse.User.logIn(username, password, {
@@ -11,7 +11,9 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
         $scope.$apply();
         foundationApi.publish('main-notifications', { title: 'Logged in!', content: 'Welcome, ' + username , autoclose: '3000' });
         $state.go('snap')
+        $window.sessionStorage.token = Parse.Session.sessionToken;
         // Do stuff after successful login.
+
       },
       error: function(user, error) {
         $scope.error = error.code + ": " + error.message
@@ -30,6 +32,7 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
         foundationApi.publish('main-notifications', { title: 'Signed up!', content: 'Successfully signed up!' , autoclose: '3000' });
         $rootScope.user = Parse.User.current();
         $state.go('snap')
+        $window.sessionStorage.token = Parse.Session.sessionToken;
         $scope.username = username;
       },
       error: function(user, error) {
@@ -42,6 +45,7 @@ loginController.controller('LoginCtrl', ['$scope', '$rootScope', '$state', 'Foun
   }
   $scope.signout=function(){
     Parse.User.logOut();
+    delete $window.sessionStorage.token;
     var currentUser = Parse.User.current();  // this will now be null
     foundationApi.publish('main-notifications', { title: 'Logged out!', content: 'You have successfully logged out!' , autoclose: '3000' });
     $scope.username = '';
