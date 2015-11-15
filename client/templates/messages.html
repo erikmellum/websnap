@@ -15,8 +15,8 @@ animationOut: hingeOutFromMiddleX
     <ul>
       <li ng-repeat="snap in messages" ng-if="user.id == snap.get('user')['objectId']" >
         <div>
-          <a ng-click="showImage(snap.id, snap.get('image').url(), snap)"><img style="cursor: pointer;" zf-iconic="" icon="Share-boxed" size="small" ></a>
-          <span style="fonter-size: 155%">{{snap.get('contents')}}</span>
+          <a ng-click="showImage(snap.id, snap.get('image').url(), snap)"><img style="cursor: pointer;" zf-iconic="" icon="share-boxed" size="small" ></a>
+          <span style="font-size: 155%">{{snap.get('contents')}}</span>
         </div>
         <div zf-modal="" id="{{snap.id}}">
           <a zf-close="{{snap.id}}" class="close-button">×</a>
