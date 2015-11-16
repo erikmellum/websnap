@@ -44,10 +44,11 @@ var paths = {
   ],
   // These files are for your app's JavaScript
   appJS: [
+    'client/assets/js/webcam.js',
     'client/assets/js/app.js',
+    'bower_components/ng-camera/dist/ng-camera.js',
     'client/assets/js/controllers/*.js',
     'client/assets/js/controllers.js'
-
   ]
 }
 
@@ -66,6 +67,8 @@ gulp.task('copy', function() {
   })
     .pipe(gulp.dest('./build'))
   ;
+  return gulp.src('client/assets/js/webcam.swf')
+  .pipe(gulp.dest('./build/assets/js'))
 });
 
 // Copies your app's page templates and generates URLs for them

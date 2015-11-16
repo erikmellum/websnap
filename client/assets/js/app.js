@@ -5,6 +5,7 @@
     'ui.router',
     'ngAnimate',
     'controllers',
+    'camera',
     //foundation
     'foundation',
     'foundation.dynamicRouting',

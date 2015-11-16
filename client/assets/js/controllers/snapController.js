@@ -2,18 +2,24 @@ var snapController = angular.module('SnapController', ['foundation.core'])
 
 snapController.controller('SnapCtrl', ['$scope', 'FoundationApi', '$state', function($scope, foundationApi, $state){
   $scope.users = [];
+  $scope.vm={};
   $scope.send=function(content){
     var fileUploadControl = angular.element(document.querySelector('#image'))[0];
-    if (fileUploadControl.files.length > 0) {
+    if (fileUploadControl.files.length > 0 || typeof($scope.vm.picture) !== 'undefined') {
       var file = fileUploadControl.files[0];
+
       var name = Math.random().toString(36)
       var parseFile = new Parse.File(name, file);
+      if(typeof($scope.vm.picture) !== 'undefined') {
+        parseFile = new Parse.File(name, { base64: $scope.vm.picture });
+      }
       parseFile.save().then(function() {
         for(var i=0; i<$scope.users.length; i++){
           if($scope.users[i] !== '' && typeof($scope.users[i]) !== 'undefined' && $scope.users[i] !== null ){
             var message = new $scope.Message();
             message.set("contents", content);
             message.set("image", parseFile);
+            message.set("from", $scope.username);
             message.set("user", $scope.users[i]);
             message.save(null, {
               success: function(message) {

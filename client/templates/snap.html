@@ -9,19 +9,51 @@ animationOut: slideOutRight
 <div class="grid-container" ng-controller="UserCtrl">
   <div class="grid-block">
     <div class="grid-content">
-      <h1>Take a picture!</h1>
+      <div class="error" ng-if="error">{{error}}</div>
       <p ng-hide="user">Sign in before creating snaps!</p>
       <p ng-hide="user.get('emailVerified') || !user">Verify your email before sending snaps.</p>
-
-      <div class="error" ng-if="error">{{error}}</div>
       <form name="snap" ng-show="user.get('emailVerified')">
-        <input type="file" id="image">
+      <div class="grid-block">
+        <div class="grid-block small-6">
+          <h1>Take a snap!</h1>
+          <ng-camera
+            capture-message="Cheeeese!"
+            output-height="160"
+            output-width="213"
+            viewer-height="300"
+            viewer-width="426"
+            crop-height="150"
+            crop-width="200"
+            image-format="jpeg"
+            jpeg-quality="100"
+            action-message="Take picture"
+            snapshot="vm.picture"
+            flash-fallback-url="/vendors/webcamjs/webcam.swf"
+            shutter-url="http://www.soundjay.com/mechanical/sounds/camera-shutter-click-01.mp3"
+        ></ng-camera>
+
+      </div>
+      <div class="grid-block small-1" ng-hide="vm.picture">
+        <h1 style="position: relative; top: 0rem; right: 3rem;">or</h1>
+      </div>
+      <div class="grid-block small-5" >
+        <h1 ng-hide="vm.picture">Upload a snap!</h1>
+        <input  type="file" id="image" ng-hide="vm.picture">
+        <div class="grid-content" ng-if="vm.picture" >
+        <img style="margin-top: 4.5rem;" width="500"  ng-src="{{vm.picture}}" alt="webcam picture">
+      </div>
+      </div>
+    </div>
+
         <hr>
-        <label>Search Users: </label><input type="text" placeholder="Search by username or email" ng-model="search">
+
+        <hr>
+        <label>Search Users: </label>
+        <input type="text" placeholder="Search by username or email" ng-model="search">
         <section class="block-list">
           <header>Select who you want to send it to</header>
           <ul style="max-height: 200px; overflow: auto;">
-            <li ng-repeat="user in all_users | filter: search">
+            <li ng-repeat="user in all_users" ng-hide="!(user.get('username').toLowerCase().includes(search.toLowerCase())) && !(user.get('email').toLowerCase().includes(search.toLowerCase())) && search.length > 0">
               <input type="checkbox" ng-model="users[$index]" name="{{user.get('username')}}" id="{{user.get('username')}}" value="{{user}}" ng-false-value="''" ng-true-value="{{user}}">
               <label for="{{user.get('username')}}">{{user.get('username')}}: {{user.get('email')}}</label>
             </li>
