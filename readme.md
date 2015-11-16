@@ -1,10 +1,4 @@
-# Foundation for Apps Template
-
-[![devDependency Status](https://david-dm.org/zurb/foundation-apps-template/dev-status.svg)](https://david-dm.org/zurb/foundation-apps-template#info=devDependencies)
-
-This is the default template project for Foundation for Apps, powered by Gulp, Angular, and libsass. It provides you with a basic template to get started with Foundation for Apps and Angular.
-
-If you're already an Angular developer, you may instead want to install the components into your own stack using Bower: `bower install foundation-apps`
+# Websnap
 
 ## Requirements
 
@@ -21,7 +15,7 @@ You'll need the following software installed to get started.
 Clone this repository, where `app` is the name of your app.
 
 ```bash
-git clone https://github.com/zurb/foundation-apps-template.git app
+git clone https://github.com/erikmellum/websnap.git
 ```
 
 Change into the directory.
@@ -34,7 +28,6 @@ Install the dependencies. If you're running Mac OS or Linux, you may need to run
 
 ```bash
 npm install
-bower install
 ```
 
 While you're working on your project, run:
